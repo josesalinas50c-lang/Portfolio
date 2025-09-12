@@ -7,7 +7,7 @@
 - [Actuarial Reserve Calculation Study](./Actuarial%20Reserve%20Calculation%20Study)
 ## 📋 Project Management
 - [AWS Cloud Architecture Vaccine Project](./AWS%20Cloud%20Architecture%20Vaccine%20Project)
-- [Project Management — Relight (LoopStudio Collaboration)](/.Relight-Loop.md)
+- [Project Management — Relight (LoopStudio Collaboration)](./Relight-Loop.md)
 - [PLANA-Design-Management](./PLANA-Management.md)
 - [Gestores-Web-Page](./Gestores-Web-Page.md)
 ## 🤖 Machine Learning
