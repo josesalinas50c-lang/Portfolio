@@ -3,7 +3,7 @@
 
 
 ## 📊 Financial Consulting
-- [Agricultural Productivity Consulting Project](./Agricultural%20Advisory%20Consulting%20Project)
+- [Agricultural Productive Advisory Project](./Agricultural%20Productive%20Advisory%20Project)
 - [Actuarial Reserve Calculation Study](./Actuarial%20Reserve%20Calculation%20Study)
 ## 📋 Project Management
 - [AWS Cloud Architecture Vaccine Project](./AWS%20Cloud%20Architecture%20Vaccine%20Project)
