@@ -1,4 +1,4 @@
-# Portfolio — Jose Salinas
+# Portfolio — Jose Salinas (Master In Systems Engineering/Project Manager/Data Scientist)
 
 
 
