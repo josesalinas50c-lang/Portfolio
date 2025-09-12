@@ -7,6 +7,7 @@
 - [Actuarial Reserve Calculation Study](./Actuarial%20Reserve%20Calculation%20Study)
 ## 📋 Project Management
 - [AWS Cloud Architecture Vaccine Project](./AWS%20Cloud%20Architecture%20Vaccine%20Project)
+- [PLANA-Design-Management](./)
 ## 🤖 Machine Learning
 - [ML Human Activity Recognition](./ML%20Human%20Activity%20Recognition)
 - [ML Job Posting Predictions](./ML%20Job%20Posting%20Predictions)
