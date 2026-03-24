@@ -3,158 +3,328 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Jose Salinas — Portfolio</title>
-  <meta name="description" content="Jose Salinas — CTO Co-founder at Bobi Inc · Cornell MEng Systems Engineering (GPA 4.17). Project Manager, Data Scientist, iOS Developer." />
+  <title>Jose Salinas</title>
+  <meta name="description" content="Jose Salinas — CTO Co-founder at Bobi Inc. Cornell MEng Systems Engineering, GPA 4.17. Project Manager, Data Scientist, iOS Developer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #0b1020; --card: #121a30; --text: #e6eaf2; --muted: #9fb0d1;
-      --link: #93c5fd; --chip: #1f2b4a; --stroke: #233157; --accent: #60a5fa;
-      --green: #34d399;
+      --bg:       #0a0b0f;
+      --surface:  #111318;
+      --border:   #1e2130;
+      --text:     #edf0f7;
+      --muted:    #6b7899;
+      --faint:    #2a2f45;
+      --gold:     #c9a84c;
+      --gold-dim: #8a6e2a;
+      --link:     #93c5fd;
     }
-    [data-theme="light"] {
-      --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
-      --link: #2563eb; --chip: #eef2ff; --stroke: #e2e8f0; --accent: #3b82f6;
-      --green: #059669;
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
-    body { font: 15px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: inherit; text-decoration: none; }
 
-    /* ── Layout ── */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
 
-    /* ── Top nav ── */
-    nav { border-bottom: 1px solid var(--stroke); padding: 14px 0; }
-    nav .inner { display: flex; justify-content: space-between; align-items: center; }
-    nav .nav-name { font-weight: 700; font-size: 1rem; }
-    nav .nav-links { display: flex; gap: 16px; align-items: center; }
-    nav .nav-links a { color: var(--muted); font-size: .9rem; }
-    nav .nav-links a:hover { color: var(--text); text-decoration: none; }
-    .theme-btn { background: transparent; border: 1px solid var(--stroke); color: var(--muted); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: .85rem; }
-    .theme-btn:hover { color: var(--text); border-color: var(--accent); }
+    .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 32px; }
 
-    /* ── Hero ── */
-    .hero { padding: 52px 0 40px; }
-    .hero-inner { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
-    .hero-photo { flex-shrink: 0; }
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,11,15,.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 0;
+    }
+    .nav-name {
+      font-size: .82rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      font-size: .82rem; font-weight: 500; letter-spacing: .04em;
+      text-transform: uppercase; color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-resume {
+      font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--gold);
+      border: 1px solid var(--gold-dim); padding: 6px 14px; border-radius: 4px;
+      transition: .2s;
+    }
+    .nav-resume:hover { background: var(--gold); color: #000; }
+
+    /* ── HERO ── */
+    .hero { padding: 80px 0 72px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
     .hero-photo img {
-      width: 160px; height: 160px; object-fit: cover; object-position: center top;
-      border-radius: 50%; border: 3px solid var(--stroke);
-      box-shadow: 0 8px 32px rgba(0,0,0,.35);
+      width: 200px; height: 200px;
+      object-fit: cover; object-position: center 10%;
+      border-radius: 6px;
+      filter: grayscale(20%) contrast(1.05);
+      border: 1px solid var(--border);
     }
-    .hero-text { flex: 1; min-width: 260px; }
-    .hero-name { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.15; margin: 0 0 4px; }
-    .hero-role { font-size: 1.05rem; color: var(--accent); font-weight: 600; margin: 0 0 10px; }
-    .hero-bio { color: var(--muted); max-width: 680px; margin: 0 0 20px; }
+    .hero-eyebrow {
+      font-size: .75rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+    }
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(40px, 5.5vw, 62px);
+      line-height: 1.05; font-weight: 400;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .hero-tagline {
+      font-size: 1rem; font-weight: 400; color: var(--muted);
+      margin-bottom: 28px; max-width: 580px;
+      line-height: 1.7;
+    }
+    .hero-tagline strong { color: var(--text); font-weight: 600; }
+
+    .stat-row { display: flex; gap: 36px; flex-wrap: wrap; margin-bottom: 32px; }
+    .stat { border-left: 2px solid var(--gold); padding-left: 14px; }
+    .stat-num { font-size: 1.4rem; font-weight: 800; color: var(--text); line-height: 1; }
+    .stat-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: 3px; }
+
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
     .badge {
+      font-size: .72rem; font-weight: 600; letter-spacing: .05em;
+      text-transform: uppercase;
+      border: 1px solid var(--faint); color: var(--muted);
+      padding: 5px 11px; border-radius: 3px;
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--chip); border: 1px solid var(--stroke);
-      border-radius: 999px; padding: 4px 12px; font-size: .82rem; margin: 0 6px 6px 0;
     }
-    .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .badge.live { border-color: #1a3a2a; color: #4ade80; }
+    .badge.live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+    .badge.honor { border-color: var(--gold-dim); color: var(--gold); }
+
+    .action-row { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn {
-      display: inline-block; padding: 9px 16px; border-radius: 10px; font-size: .9rem;
-      border: 1px solid var(--stroke); color: var(--text); transition: .15s;
+      font-size: .8rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; padding: 10px 20px; border-radius: 4px;
+      border: 1px solid var(--border); color: var(--muted); transition: .2s;
     }
-    .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-    .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .btn-primary:hover { opacity: .88; color: #fff; }
-    .edu-logos { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--stroke); }
-    .edu-logos img { height: 64px; filter: grayscale(15%); opacity: .9; }
+    .btn:hover { border-color: var(--muted); color: var(--text); }
+    .btn-gold {
+      background: var(--gold); color: #000; border-color: var(--gold);
+    }
+    .btn-gold:hover { opacity: .88; color: #000; }
 
-    /* ── Sections ── */
-    section { padding: 36px 0; border-top: 1px solid var(--stroke); }
-    .section-title { font-size: 1.2rem; font-weight: 700; margin: 0 0 20px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+    .edu-row {
+      display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+      margin-top: 40px; padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .edu-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-right: 8px; }
+    .edu-row img { height: 52px; filter: grayscale(40%) brightness(.85); opacity: .8; transition: .2s; }
+    .edu-row img:hover { filter: grayscale(0%) brightness(1); opacity: 1; }
 
-    /* ── Experience ── */
-    .exp-list { display: flex; flex-direction: column; gap: 24px; }
-    .exp-item {}
-    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 4px; }
-    .exp-title { font-weight: 700; font-size: 1rem; }
-    .exp-meta { color: var(--muted); font-size: .85rem; white-space: nowrap; }
-    .exp-company { color: var(--accent); font-size: .9rem; margin: 2px 0 8px; }
-    .exp-bullets { margin: 0; padding-left: 18px; color: var(--muted); }
-    .exp-bullets li { margin-bottom: 5px; font-size: .9rem; }
-    .exp-bullets li strong { color: var(--text); }
+    /* ── DIVIDER ── */
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-    /* ── Projects grid ── */
-    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
-    .card { background: var(--card); border: 1px solid var(--stroke); border-radius: 16px; padding: 18px; transition: .2s; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.22); border-color: var(--accent); }
-    .card-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--accent); margin-bottom: 6px; }
-    .card h3 { margin: 0 0 6px; font-size: 1rem; }
-    .card p { margin: 0 0 12px; color: var(--muted); font-size: .88rem; line-height: 1.5; }
-    .chips { display: flex; gap: 8px; flex-wrap: wrap; }
-    .chip { background: var(--chip); border: 1px solid var(--stroke); padding: 4px 10px; border-radius: 999px; font-size: .8rem; }
+    /* ── EXPERIENCE ── */
+    .experience { padding: 72px 0; }
+    .section-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 48px;
+    }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0 48px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+    .exp-left { padding-top: 3px; }
+    .exp-company { font-size: .9rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .exp-period { font-size: .75rem; color: var(--muted); margin-bottom: 6px; }
+    .exp-loc { font-size: .72rem; color: var(--faint); letter-spacing: .03em; }
+    .exp-right {}
+    .exp-role { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .exp-bullets { list-style: none; padding: 0; }
+    .exp-bullets li {
+      font-size: .88rem; color: var(--muted); margin-bottom: 8px;
+      padding-left: 16px; position: relative; line-height: 1.6;
+    }
+    .exp-bullets li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--gold-dim); font-size: .7rem; top: .25em;
+    }
+    .exp-bullets li strong { color: var(--text); font-weight: 600; }
+    .exp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+    .exp-tag {
+      font-size: .68rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--faint); padding: 3px 8px; border-radius: 2px;
+    }
 
-    /* ── Skills ── */
-    .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-    .skill-group h4 { margin: 0 0 8px; font-size: .85rem; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+    /* ── SELECTED WORK ── */
+    .work { padding: 72px 0; }
+    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .work-card {
+      background: var(--bg);
+      padding: 28px 26px;
+      transition: background .2s;
+    }
+    .work-card:hover { background: var(--surface); }
+    .work-card a:hover { text-decoration: none; }
+    .work-category {
+      font-size: .65rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold-dim); margin-bottom: 10px;
+    }
+    .work-title {
+      font-size: .97rem; font-weight: 700; color: var(--text);
+      margin-bottom: 8px; line-height: 1.35;
+    }
+    .work-card:hover .work-title { color: var(--gold); }
+    .work-desc {
+      font-size: .82rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px;
+    }
+    .work-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+    .work-chip {
+      font-size: .65rem; font-weight: 600; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--faint); padding: 3px 7px; border-radius: 2px;
+    }
 
-    /* ── Footer ── */
-    footer { border-top: 1px solid var(--stroke); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: .85rem; }
+    /* ── SKILLS ── */
+    .skills { padding: 72px 0; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px 40px; }
+    .skill-group-label {
+      font-size: .68rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .skill-list { list-style: none; padding: 0; }
+    .skill-list li {
+      font-size: .85rem; color: var(--muted);
+      padding: 4px 0; border-bottom: 1px solid var(--border);
+    }
+    .skill-list li:last-child { border-bottom: none; }
 
-    @media (max-width: 600px) {
-      .hero-inner { flex-direction: column; align-items: center; text-align: center; }
-      .hero-photo img { width: 130px; height: 130px; }
-      .hero-actions { justify-content: center; }
-      .exp-header { flex-direction: column; }
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0; margin-top: 0;
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-name { font-size: .82rem; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: .8rem; color: var(--muted); transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 760px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-photo img { width: 120px; height: 120px; border-radius: 50%; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      .exp-left { padding-top: 0; }
+      .work-grid { grid-template-columns: 1fr; }
+      .stat-row { gap: 20px; }
+      .nav-links { gap: 16px; }
+    }
+    @media (max-width: 540px) {
+      .wrap { padding: 0 20px; }
+      .nav-links a:not(.nav-resume) { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Nav -->
+  <!-- NAV -->
   <nav>
-    <div class="container inner">
+    <div class="wrap nav-inner">
       <span class="nav-name">Jose Salinas</span>
       <div class="nav-links">
         <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
+        <a href="#work">Work</a>
         <a href="#skills">Skills</a>
-        <a href="mailto:js3873@cornell.edu">Contact</a>
-        <button id="themeBtn" class="theme-btn">Toggle theme</button>
+        <a class="nav-resume" href="./assets/Jose Salinas Tech CV.pdf" target="_blank">Resume</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <div class="container">
-    <div class="hero">
-      <div class="hero-inner">
+  <!-- HERO -->
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
 
         <div class="hero-photo">
           <img src="./assets/profile.png" alt="Jose Salinas" />
         </div>
 
-        <div class="hero-text">
-          <h1 class="hero-name">Jose Ruben Salinas</h1>
-          <p class="hero-role">CTO Co-founder · Project Manager · Data Scientist</p>
-          <p class="hero-bio">
-            Cornell MEng in Systems Engineering (GPA 4.17 · top 10%). I build data products and
-            lead cross-functional engineering teams end-to-end — currently co-founding
-            <strong>Bobi Inc</strong>, an iOS platform connecting content creators with small businesses,
-            and serving as Graduate Research &amp; Teaching Assistant at Cornell.
+        <div class="hero-content">
+          <div class="hero-eyebrow">Available for senior roles</div>
+          <h1 class="hero-name">Jose Ruben<br>Salinas</h1>
+          <p class="hero-tagline">
+            CTO Co-founder · Project Manager · Data Scientist.<br>
+            Cornell MEng Systems Engineering — <strong>GPA 4.17, top 10%</strong>.
+            I build products from zero to production and lead engineering organizations across continents.
           </p>
 
-          <div>
-            <span class="badge"><span class="dot"></span> CTO Co-founder @ Bobi Inc</span>
-            <span class="badge"><span class="dot"></span> Cornell TA · Data Science &amp; AI</span>
-            <span class="badge">Phi Kappa Phi Honor Society</span>
-            <span class="badge">AI Academic Fellowship</span>
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-num">4.17</div>
+              <div class="stat-label">Cornell GPA</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">5</div>
+              <div class="stat-label">Prod. Deployments</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">12</div>
+              <div class="stat-label">Team Built</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">~50%</div>
+              <div class="stat-label">Cost Reduction</div>
+            </div>
           </div>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="./assets/Jose Salinas Tech CV.pdf" target="_blank">Resume (PDF)</a>
+          <div class="badge-row">
+            <span class="badge live">CTO Co-founder @ Bobi Inc</span>
+            <span class="badge live">Cornell TA · Data Science &amp; AI</span>
+            <span class="badge honor">Phi Kappa Phi Honor Society</span>
+            <span class="badge honor">AI Academic Fellowship</span>
+          </div>
+
+          <div class="action-row">
+            <a class="btn btn-gold" href="./assets/Jose Salinas Tech CV.pdf" target="_blank">Download Resume</a>
             <a class="btn" href="mailto:js3873@cornell.edu">js3873@cornell.edu</a>
             <a class="btn" href="https://linkedin.com/in/jose-salinas-336424173" target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn" href="https://github.com/josesalinas50c-lang/Portfolio" target="_blank" rel="noopener">GitHub</a>
           </div>
 
-          <div class="edu-logos" aria-label="Education">
+          <div class="edu-row">
+            <span class="edu-label">Education</span>
             <img src="./assets/cornell.png" alt="Cornell University" />
             <img src="./assets/kth.png"     alt="KTH Royal Institute of Technology" />
             <img src="./assets/itba.jpg"    alt="ITBA Buenos Aires" />
@@ -162,274 +332,272 @@
         </div>
 
       </div>
-    </div><!-- /.hero -->
+    </section>
+  </div>
 
-    <!-- Experience -->
-    <section id="experience">
-      <div class="section-title">Experience</div>
-      <div class="exp-list">
+  <hr class="section-divider">
 
-        <div class="exp-item">
-          <div class="exp-header">
-            <span class="exp-title">CTO Co-founder</span>
-            <span class="exp-meta">Aug 2025 – Present · Remote</span>
-          </div>
+  <!-- EXPERIENCE -->
+  <div class="wrap">
+    <section class="experience" id="experience">
+      <div class="section-label">Experience</div>
+
+      <div class="exp-item">
+        <div class="exp-left">
           <div class="exp-company">Bobi Inc</div>
-          <ul class="exp-bullets">
-            <li>Built Bobi's <strong>iOS app</strong> to connect content creators with small businesses — Swift, Gemini AI, and Instagram Graph API integrations.</li>
-            <li>Defined product scope and system architecture; validated product-market fit through structured stakeholder interviews and iterative feature releases.</li>
-            <li>Delivered a <strong>production-ready app</strong> in 4 months; adopted 20+ early users in early 2026.</li>
-          </ul>
+          <div class="exp-period">Aug 2025 – Present</div>
+          <div class="exp-loc">Remote</div>
         </div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <span class="exp-title">Graduate Research &amp; Teaching Assistant — Data Science &amp; AI</span>
-            <span class="exp-meta">Jan 2026 – Present · Ithaca, NY</span>
+        <div class="exp-right">
+          <div class="exp-role">CTO Co-founder</div>
+          <ul class="exp-bullets">
+            <li>Built Bobi's <strong>iOS app</strong> end-to-end in Swift — connecting content creators with small businesses via Gemini AI and Instagram Graph API integrations.</li>
+            <li>Defined product scope and system architecture; validated product-market fit through structured stakeholder interviews and iterative releases.</li>
+            <li>Delivered a <strong>production-ready app in 4 months</strong>; reached 20+ early users in early 2026.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">Swift</span>
+            <span class="exp-tag">iOS</span>
+            <span class="exp-tag">Gemini AI</span>
+            <span class="exp-tag">Instagram API</span>
+            <span class="exp-tag">Product</span>
           </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
           <div class="exp-company">Cornell University</div>
+          <div class="exp-period">Jan 2026 – Present</div>
+          <div class="exp-loc">Ithaca, NY</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Graduate Research &amp; Teaching Assistant — Data Science &amp; AI</div>
           <ul class="exp-bullets">
             <li>Mentor student data and API projects in graduate AI coursework, improving technical project execution quality.</li>
           </ul>
-        </div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <span class="exp-title">Project Manager / Data Scientist</span>
-            <span class="exp-meta">Jun 2024 – Sep 2025 · U.S. Remote</span>
+          <div class="exp-tags">
+            <span class="exp-tag">AI</span>
+            <span class="exp-tag">Data Science</span>
+            <span class="exp-tag">Mentorship</span>
           </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
           <div class="exp-company">LoopStudio</div>
+          <div class="exp-period">Jun 2024 – Sep 2025</div>
+          <div class="exp-loc">U.S. Remote</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Project Manager / Data Scientist</div>
           <ul class="exp-bullets">
-            <li>Led cross-regional engineering teams across projects with <strong>~$10K monthly budgets</strong>, achieving 5 successful production deployments in one year.</li>
+            <li>Led cross-regional engineering teams across projects with <strong>~$10K monthly budgets each</strong> — 5 successful production deployments in one year.</li>
             <li>Eliminated <strong>~16 weekly manual reporting hours</strong> across 4 PMs by building an internal automation app integrating the Harvest API.</li>
-            <li>Built automated performance dashboards providing real-time visibility into team utilization and client delivery metrics.</li>
+            <li>Built automated performance dashboards enabling real-time visibility into team utilization and client delivery metrics.</li>
           </ul>
-        </div>
-
-        <div class="exp-item">
-          <div class="exp-header">
-            <span class="exp-title">Project Manager</span>
-            <span class="exp-meta">Apr 2022 – Aug 2023 · U.S. Remote / Argentina / Sweden</span>
+          <div class="exp-tags">
+            <span class="exp-tag">PM</span>
+            <span class="exp-tag">Python</span>
+            <span class="exp-tag">Automation</span>
+            <span class="exp-tag">Dashboards</span>
           </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
           <div class="exp-company">Agile Solutions</div>
+          <div class="exp-period">Apr 2022 – Aug 2023</div>
+          <div class="exp-loc">U.S. Remote · Argentina · Sweden</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Project Manager</div>
           <ul class="exp-bullets">
-            <li>Built the Argentina technical team from inception — a fully operational <strong>delivery unit of 12 people</strong> with ~$20K/month budget.</li>
-            <li>Engineered a legally compliant cross-border contractor structure improving talent retention under a constrained startup budget.</li>
-            <li>Reduced compensation costs by <strong>~50%</strong> vs. market benchmarks using Python and Power BI analytics tools.</li>
-            <li>Relocated to Sweden to secure AI ecosystem partnerships, defining the company's 2023 AI strategy.</li>
+            <li>Built the Argentina technical team from scratch — <strong>12-person delivery unit, ~$20K/month budget</strong>.</li>
+            <li>Engineered a legally compliant cross-border contractor structure that improved talent retention under constrained startup conditions.</li>
+            <li>Reduced compensation costs by <strong>~50% vs. market benchmarks</strong> using Python and Power BI analytics tools.</li>
+            <li>Relocated to Sweden to secure AI ecosystem partnerships; defined the company's 2023 AI strategy.</li>
           </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects">
-      <div class="section-title">Featured Projects</div>
-      <div class="grid">
-
-        <div class="card">
-          <div class="card-tag">iOS · Startup</div>
-          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio" target="_blank">Bobi — iOS App</a></h3>
-          <p>Platform connecting content creators with small businesses. Built end-to-end in Swift with Gemini AI and Instagram Graph API integrations. 20+ early users in production.</p>
-          <div class="chips">
-            <span class="chip">Swift</span>
-            <span class="chip">iOS</span>
-            <span class="chip">Gemini AI</span>
-            <span class="chip">Instagram API</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">PM · Cloud</div>
-          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/AWS%20Cloud%20Architecture%20Vaccine%20Project" target="_blank">AWS Cloud Architecture</a></h3>
-          <p>Serverless vaccine-data system: API Gateway + Lambda + DynamoDB + VPC Endpoints, multi-AZ architecture, fully deployed via Terraform.</p>
-          <div class="chips">
-            <span class="chip">AWS</span>
-            <span class="chip">Terraform</span>
-            <span class="chip">Serverless</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">PM · Product</div>
-          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/blob/main/PLANA-Management.md" target="_blank">Plana — PM Case</a></h3>
-          <p>End-to-end PM case for a renovation platform: scope definition, roadmap, risk management and workflow demos.</p>
-          <div class="chips">
-            <span class="chip">PM</span>
-            <span class="chip">Roadmap</span>
-            <span class="chip">Risk</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">PM · UX</div>
-          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/blob/main/Relight-Loop.md" target="_blank">Relight — PM with LoopStudio</a></h3>
-          <p>Directed full UX redesign for the Relight platform; stakeholder alignment, delivery management and quality handoff.</p>
-          <div class="chips">
-            <span class="chip">PM</span>
-            <span class="chip">UX</span>
-            <span class="chip">LoopStudio</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">Python · Health</div>
-          <h3><a href="https://github.com/js3873-web/Perinatal-Mental-Health-App.git" target="_blank">Perinatal Mental Health App</a></h3>
-          <p>End-to-end Flask web app for perinatal mental-health screening with risk scoring and structured clinical forms.</p>
-          <div class="chips">
-            <span class="chip">Python</span>
-            <span class="chip">Flask</span>
-            <span class="chip">Healthcare</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">Python · ML</div>
-          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/ML%20Human%20Activity%20Recognition" target="_blank">Human Activity Recognition</a></h3>
-          <p>ML pipeline for smartphone-sensor activity classification (accelerometer/gyroscope) with feature engineering and model evaluation.</p>
-          <div class="chips">
-            <span class="chip">Python</span>
-            <span class="chip">ML</span>
-            <span class="chip">Sensors</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">Python · Climate</div>
-          <h3><a href="https://github.com/FMDX-7/ShortTermHeatStressForecasting.git" target="_blank">Heat Stress Forecasting</a></h3>
-          <p>Time-series and ML modeling to forecast short-term heat stress indices for occupational and health-risk decision making.</p>
-          <div class="chips">
-            <span class="chip">Python</span>
-            <span class="chip">Time Series</span>
-            <span class="chip">Climate</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">Python · NLP</div>
-          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/ML%20Job%20Posting%20Predictions" target="_blank">Job Posting Predictions</a></h3>
-          <p>NLP and ML to classify and cluster LinkedIn job listings, with engagement forecasting using gradient-boosting models.</p>
-          <div class="chips">
-            <span class="chip">Python</span>
-            <span class="chip">NLP</span>
-            <span class="chip">XGBoost</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">Python · Six Sigma</div>
-          <h3><a href="https://github.com/jacrwalker/SixSigmaHackathon.git" target="_blank">Six Sigma Process Analytics</a></h3>
-          <p>Data-driven Six Sigma hackathon project using Python for statistical quality control and process improvement recommendations.</p>
-          <div class="chips">
-            <span class="chip">Python</span>
-            <span class="chip">Six Sigma</span>
-            <span class="chip">Statistics</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">Actuarial · Risk</div>
-          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/Actuarial%20Reserve%20Calculation%20Study" target="_blank">Actuarial Reserve Calculation</a></h3>
-          <p>Actuarial modeling for damage coverage and balance-guarantee reserves, with scenario analysis and risk simulation.</p>
-          <div class="chips">
-            <span class="chip">Actuarial</span>
-            <span class="chip">Risk</span>
-            <span class="chip">Python</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-tag">Analytics · Viz</div>
-          <h3>
-            <a href="https://public.tableau.com/views/FinalProyecto/Final?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener">
-              Tableau Analytics Dashboard
-            </a>
-          </h3>
-          <p>Interactive Tableau dashboard for exploratory analytics and executive-level data storytelling.</p>
-          <div class="chips">
-            <span class="chip">Tableau</span>
-            <span class="chip">Data Viz</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills">
-      <div class="section-title">Skills</div>
-      <div class="skill-grid">
-        <div class="skill-group">
-          <h4>Languages</h4>
-          <div class="chips">
-            <span class="chip">Python</span>
-            <span class="chip">Swift</span>
-            <span class="chip">R</span>
-            <span class="chip">SQL</span>
-            <span class="chip">Spark</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Analytics &amp; BI</h4>
-          <div class="chips">
-            <span class="chip">Tableau</span>
-            <span class="chip">Power BI</span>
-            <span class="chip">Excel</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Cloud &amp; Dev</h4>
-          <div class="chips">
-            <span class="chip">AWS</span>
-            <span class="chip">Terraform</span>
-            <span class="chip">Flask</span>
-            <span class="chip">iOS / SwiftUI</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>AI &amp; ML</h4>
-          <div class="chips">
-            <span class="chip">Machine Learning</span>
-            <span class="chip">NLP</span>
-            <span class="chip">Gemini AI</span>
-            <span class="chip">Time Series</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Leadership</h4>
-          <div class="chips">
-            <span class="chip">Project Management</span>
-            <span class="chip">Six Sigma Black Belt</span>
-            <span class="chip">Systems Engineering</span>
-            <span class="chip">Cross-functional Teams</span>
+          <div class="exp-tags">
+            <span class="exp-tag">PM</span>
+            <span class="exp-tag">Python</span>
+            <span class="exp-tag">Power BI</span>
+            <span class="exp-tag">Team Building</span>
           </div>
         </div>
       </div>
+
     </section>
-
-  </div><!-- /.container -->
-
-  <div class="container">
-    <footer>
-      <span>© 2026 Jose Ruben Salinas</span>
-      <span>
-        <a href="mailto:js3873@cornell.edu">js3873@cornell.edu</a> ·
-        <a href="mailto:josesalinas50c@gmail.com">josesalinas50c@gmail.com</a>
-      </span>
-    </footer>
   </div>
 
-  <script>
-    const btn = document.getElementById('themeBtn');
-    const setTheme = t => (document.documentElement.setAttribute('data-theme', t), localStorage.setItem('theme', t));
-    const saved = localStorage.getItem('theme');
-    if (saved) setTheme(saved);
-    btn.addEventListener('click', () => {
-      const cur = document.documentElement.getAttribute('data-theme') || 'dark';
-      setTheme(cur === 'dark' ? 'light' : 'dark');
-    });
-  </script>
+  <hr class="section-divider">
+
+  <!-- SELECTED WORK -->
+  <div class="wrap">
+    <section class="work" id="work">
+      <div class="section-label">Selected Work</div>
+      <div class="work-grid">
+
+        <a href="https://github.com/josesalinas50c-lang/Portfolio" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">iOS · Startup · 2025–2026</div>
+            <div class="work-title">Bobi — iOS Platform</div>
+            <div class="work-desc">Built end-to-end in Swift. Connects content creators with small businesses via Gemini AI and Instagram Graph API. 20+ early users in production.</div>
+            <div class="work-chips"><span class="work-chip">Swift</span><span class="work-chip">iOS</span><span class="work-chip">Gemini AI</span><span class="work-chip">Instagram API</span></div>
+          </div>
+        </a>
+
+        <a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/AWS%20Cloud%20Architecture%20Vaccine%20Project" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">Cloud Architecture · AWS</div>
+            <div class="work-title">Serverless Vaccine Data System</div>
+            <div class="work-desc">Multi-AZ serverless architecture: API Gateway + Lambda + DynamoDB + VPC Endpoints, fully provisioned via Terraform.</div>
+            <div class="work-chips"><span class="work-chip">AWS</span><span class="work-chip">Terraform</span><span class="work-chip">Lambda</span><span class="work-chip">DynamoDB</span></div>
+          </div>
+        </a>
+
+        <a href="https://github.com/js3873-web/Perinatal-Mental-Health-App.git" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">Python · Healthcare</div>
+            <div class="work-title">Perinatal Mental Health App</div>
+            <div class="work-desc">Full-stack Flask application for perinatal mental-health screening with clinical risk scoring and structured intake forms.</div>
+            <div class="work-chips"><span class="work-chip">Python</span><span class="work-chip">Flask</span><span class="work-chip">Healthcare</span></div>
+          </div>
+        </a>
+
+        <a href="https://github.com/josesalinas50c-lang/Portfolio/blob/main/PLANA-Management.md" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">PM · Product Strategy</div>
+            <div class="work-title">Plana — End-to-End PM Case</div>
+            <div class="work-desc">Scope definition, roadmap, risk registry, and workflow demos for a renovation platform from zero to delivery.</div>
+            <div class="work-chips"><span class="work-chip">PM</span><span class="work-chip">Roadmap</span><span class="work-chip">Risk</span></div>
+          </div>
+        </a>
+
+        <a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/ML%20Job%20Posting%20Predictions" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">Python · ML · NLP</div>
+            <div class="work-title">Job Posting Predictions</div>
+            <div class="work-desc">NLP pipeline to classify and cluster LinkedIn job listings with engagement forecasting using gradient-boosting models.</div>
+            <div class="work-chips"><span class="work-chip">Python</span><span class="work-chip">NLP</span><span class="work-chip">XGBoost</span></div>
+          </div>
+        </a>
+
+        <a href="https://github.com/FMDX-7/ShortTermHeatStressForecasting.git" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">Python · Climate · Time Series</div>
+            <div class="work-title">Heat Stress Forecasting</div>
+            <div class="work-desc">ML and time-series modeling to forecast short-term heat stress indices for occupational health-risk decision making.</div>
+            <div class="work-chips"><span class="work-chip">Python</span><span class="work-chip">Time Series</span><span class="work-chip">ML</span></div>
+          </div>
+        </a>
+
+        <a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/ML%20Human%20Activity%20Recognition" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">Python · ML · Sensors</div>
+            <div class="work-title">Human Activity Recognition</div>
+            <div class="work-desc">ML pipeline for smartphone-sensor activity classification using accelerometer/gyroscope data with full feature engineering.</div>
+            <div class="work-chips"><span class="work-chip">Python</span><span class="work-chip">ML</span><span class="work-chip">Classification</span></div>
+          </div>
+        </a>
+
+        <a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/Actuarial%20Reserve%20Calculation%20Study" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">Actuarial · Risk</div>
+            <div class="work-title">Actuarial Reserve Calculation</div>
+            <div class="work-desc">Actuarial modeling for damage coverage and balance-guarantee reserves with scenario analysis and risk simulation.</div>
+            <div class="work-chips"><span class="work-chip">Actuarial</span><span class="work-chip">Risk</span><span class="work-chip">Python</span></div>
+          </div>
+        </a>
+
+        <a href="https://public.tableau.com/views/FinalProyecto/Final?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener">
+          <div class="work-card">
+            <div class="work-category">Analytics · Visualization</div>
+            <div class="work-title">Tableau Executive Dashboard</div>
+            <div class="work-desc">Interactive Tableau dashboard for exploratory analytics and executive-level data storytelling — live on Tableau Public.</div>
+            <div class="work-chips"><span class="work-chip">Tableau</span><span class="work-chip">Data Viz</span></div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SKILLS -->
+  <div class="wrap">
+    <section class="skills" id="skills">
+      <div class="section-label">Skills</div>
+      <div class="skills-grid">
+        <div>
+          <div class="skill-group-label">Languages</div>
+          <ul class="skill-list">
+            <li>Python</li>
+            <li>Swift / SwiftUI</li>
+            <li>R</li>
+            <li>SQL</li>
+            <li>Apache Spark</li>
+          </ul>
+        </div>
+        <div>
+          <div class="skill-group-label">Cloud &amp; Infra</div>
+          <ul class="skill-list">
+            <li>AWS (Lambda, API GW, DynamoDB)</li>
+            <li>Terraform (IaC)</li>
+            <li>VPC / Networking</li>
+            <li>iOS App Deployment</li>
+          </ul>
+        </div>
+        <div>
+          <div class="skill-group-label">AI &amp; ML</div>
+          <ul class="skill-list">
+            <li>Machine Learning</li>
+            <li>NLP &amp; Text Analytics</li>
+            <li>Gemini AI Integration</li>
+            <li>Time Series Forecasting</li>
+          </ul>
+        </div>
+        <div>
+          <div class="skill-group-label">Analytics &amp; BI</div>
+          <ul class="skill-list">
+            <li>Tableau</li>
+            <li>Power BI</li>
+            <li>Excel (advanced)</li>
+            <li>Flask Web Apps</li>
+          </ul>
+        </div>
+        <div>
+          <div class="skill-group-label">Leadership</div>
+          <ul class="skill-list">
+            <li>Project Management</li>
+            <li>Six Sigma Black Belt</li>
+            <li>Systems Engineering</li>
+            <li>Cross-functional Teams</li>
+            <li>Product Strategy</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- FOOTER -->
+  <div class="wrap">
+    <footer>
+      <div class="footer-inner">
+        <span class="footer-name">© 2026 Jose Ruben Salinas</span>
+        <div class="footer-links">
+          <a href="mailto:js3873@cornell.edu">Email</a>
+          <a href="https://linkedin.com/in/jose-salinas-336424173" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/josesalinas50c-lang/Portfolio" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 
 </body>
 </html>
