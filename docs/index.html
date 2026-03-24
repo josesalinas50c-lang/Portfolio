@@ -4,251 +4,430 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Jose Salinas — Portfolio</title>
-  <meta name="description" content="Jose Salinas — Project Manager & Data Scientist. Cornell MEng in Systems Engineering." />
+  <meta name="description" content="Jose Salinas — CTO Co-founder at Bobi Inc · Cornell MEng Systems Engineering (GPA 4.17). Project Manager, Data Scientist, iOS Developer." />
   <style>
-    :root{
-      --bg:#0b1020; --card:#121a30; --text:#e6eaf2; --muted:#9fb0d1; --link:#93c5fd; --chip:#1f2b4a; --stroke:#233157;
-      --accent:#60a5fa;
+    :root {
+      --bg: #0b1020; --card: #121a30; --text: #e6eaf2; --muted: #9fb0d1;
+      --link: #93c5fd; --chip: #1f2b4a; --stroke: #233157; --accent: #60a5fa;
+      --green: #34d399;
     }
-    [data-theme="light"]{
-      --bg:#ffffff; --card:#ffffff; --text:#0f172a; --muted:#475569; --link:#2563eb; --chip:#eef2ff; --stroke:#e5e7eb;
-      --accent:#3b82f6;
+    [data-theme="light"] {
+      --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #475569;
+      --link: #2563eb; --chip: #eef2ff; --stroke: #e2e8f0; --accent: #3b82f6;
+      --green: #059669;
     }
-    html,body{height:100%}
-    body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;background:var(--bg);color:var(--text)}
-    a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-    header,main,footer{max-width:1120px;margin:0 auto;padding:24px}
-    .hero{display:flex;flex-direction:column;gap:12px;padding:40px 24px}
-    .title{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:.2px}
-    .subtitle{color:var(--muted);max-width:820px}
-    .actions a{display:inline-block;margin-right:12px;padding:10px 14px;border-radius:12px;border:1px solid var(--stroke)}
-    .logos{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:8px}
-    .logos img{height:80px;filter:grayscale(20%);opacity:.95}
-    .section-title{font-size:22px;margin:28px 0 14px;font-weight:700}
-    .chips{display:flex;gap:10px;flex-wrap:wrap}
-    .chip{background:var(--chip);color:var(--text);border:1px solid var(--stroke);padding:6px 10px;border-radius:999px;font-size:.9rem}
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:16px;transition:.2s box-shadow,.2s transform}
-    .card h3{margin:.1rem 0 .35rem;font-size:1.05rem}
-    .card p{margin:.2rem 0 .4rem;color:var(--muted)}
-    .card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.18)}
-    .footer{color:var(--muted);border-top:1px solid var(--stroke);margin-top:28px}
-    .row{display:flex;gap:22px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-    .theme{border:1px solid var(--stroke);background:transparent;color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
-    @media (max-width:680px){.actions a{margin-top:6px}}
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body { font: 15px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Top nav ── */
+    nav { border-bottom: 1px solid var(--stroke); padding: 14px 0; }
+    nav .inner { display: flex; justify-content: space-between; align-items: center; }
+    nav .nav-name { font-weight: 700; font-size: 1rem; }
+    nav .nav-links { display: flex; gap: 16px; align-items: center; }
+    nav .nav-links a { color: var(--muted); font-size: .9rem; }
+    nav .nav-links a:hover { color: var(--text); text-decoration: none; }
+    .theme-btn { background: transparent; border: 1px solid var(--stroke); color: var(--muted); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: .85rem; }
+    .theme-btn:hover { color: var(--text); border-color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero { padding: 52px 0 40px; }
+    .hero-inner { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+    .hero-photo { flex-shrink: 0; }
+    .hero-photo img {
+      width: 160px; height: 160px; object-fit: cover; object-position: center top;
+      border-radius: 50%; border: 3px solid var(--stroke);
+      box-shadow: 0 8px 32px rgba(0,0,0,.35);
+    }
+    .hero-text { flex: 1; min-width: 260px; }
+    .hero-name { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.15; margin: 0 0 4px; }
+    .hero-role { font-size: 1.05rem; color: var(--accent); font-weight: 600; margin: 0 0 10px; }
+    .hero-bio { color: var(--muted); max-width: 680px; margin: 0 0 20px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--chip); border: 1px solid var(--stroke);
+      border-radius: 999px; padding: 4px 12px; font-size: .82rem; margin: 0 6px 6px 0;
+    }
+    .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .btn {
+      display: inline-block; padding: 9px 16px; border-radius: 10px; font-size: .9rem;
+      border: 1px solid var(--stroke); color: var(--text); transition: .15s;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-primary:hover { opacity: .88; color: #fff; }
+    .edu-logos { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--stroke); }
+    .edu-logos img { height: 64px; filter: grayscale(15%); opacity: .9; }
+
+    /* ── Sections ── */
+    section { padding: 36px 0; border-top: 1px solid var(--stroke); }
+    .section-title { font-size: 1.2rem; font-weight: 700; margin: 0 0 20px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+
+    /* ── Experience ── */
+    .exp-list { display: flex; flex-direction: column; gap: 24px; }
+    .exp-item {}
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 4px; }
+    .exp-title { font-weight: 700; font-size: 1rem; }
+    .exp-meta { color: var(--muted); font-size: .85rem; white-space: nowrap; }
+    .exp-company { color: var(--accent); font-size: .9rem; margin: 2px 0 8px; }
+    .exp-bullets { margin: 0; padding-left: 18px; color: var(--muted); }
+    .exp-bullets li { margin-bottom: 5px; font-size: .9rem; }
+    .exp-bullets li strong { color: var(--text); }
+
+    /* ── Projects grid ── */
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
+    .card { background: var(--card); border: 1px solid var(--stroke); border-radius: 16px; padding: 18px; transition: .2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.22); border-color: var(--accent); }
+    .card-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--accent); margin-bottom: 6px; }
+    .card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .card p { margin: 0 0 12px; color: var(--muted); font-size: .88rem; line-height: 1.5; }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { background: var(--chip); border: 1px solid var(--stroke); padding: 4px 10px; border-radius: 999px; font-size: .8rem; }
+
+    /* ── Skills ── */
+    .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .skill-group h4 { margin: 0 0 8px; font-size: .85rem; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--stroke); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: .85rem; }
+
+    @media (max-width: 600px) {
+      .hero-inner { flex-direction: column; align-items: center; text-align: center; }
+      .hero-photo img { width: 130px; height: 130px; }
+      .hero-actions { justify-content: center; }
+      .exp-header { flex-direction: column; }
+    }
   </style>
 </head>
-
 <body>
-  <header class="hero">
-    <div class="row">
-      <div>
-        <div class="title">Jose Salinas — Project Manager · Data Scientist</div>
-        <p class="subtitle">
-          Master in Systems Engineering (Cornell MEng). I design data products and lead cross-functional teams end-to-end — with focus on 
-          <b>IT & Fintech Projects</b> and <b>Systems Engineering</b>.
-        </p>
 
-        <div class="actions">
-          <a href="./assets/Jose Salinas Tech CV.pdf">Resume (PDF)</a>
-          <a href="mailto:js3873@cornell.edu">Email</a>
-          <a href="https://github.com/josesalinas50c-lang/Portfolio" target="_blank" rel="noopener">GitHub Repo</a>
-          <button id="themeBtn" class="theme" aria-label="Toggle theme">Toggle theme</button>
-        </div>
-      </div>
-
-      <div>
-        <div class="logos" aria-label="Education logos">
-          <img src="./assets/cornell.png?v=1" alt="Cornell University logo">
-          <img src="./assets/kth.png?v=1"     alt="KTH Royal Institute of Technology logo">
-          <img src="./assets/itba.jpg?v=1"    alt="ITBA logo">
-        </div>
+  <!-- Nav -->
+  <nav>
+    <div class="container inner">
+      <span class="nav-name">Jose Salinas</span>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="mailto:js3873@cornell.edu">Contact</a>
+        <button id="themeBtn" class="theme-btn">Toggle theme</button>
       </div>
     </div>
+  </nav>
 
-    <div>
-      <div class="section-title">Focus Areas</div>
-      <div class="chips">
-        <span class="chip">Data Science</span>
-        <span class="chip">Systems Engineering</span>
-        <span class="chip">Project Management</span>
-        <span class="chip">Machine Learning</span>
-        <span class="chip">AWS Architecture</span>
-        <span class="chip">Actuarial / Risk</span>
+  <!-- Hero -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-inner">
+
+        <div class="hero-photo">
+          <img src="./assets/profile.png" alt="Jose Salinas" />
+        </div>
+
+        <div class="hero-text">
+          <h1 class="hero-name">Jose Ruben Salinas</h1>
+          <p class="hero-role">CTO Co-founder · Project Manager · Data Scientist</p>
+          <p class="hero-bio">
+            Cornell MEng in Systems Engineering (GPA 4.17 · top 10%). I build data products and
+            lead cross-functional engineering teams end-to-end — currently co-founding
+            <strong>Bobi Inc</strong>, an iOS platform connecting content creators with small businesses,
+            and serving as Graduate Research &amp; Teaching Assistant at Cornell.
+          </p>
+
+          <div>
+            <span class="badge"><span class="dot"></span> CTO Co-founder @ Bobi Inc</span>
+            <span class="badge"><span class="dot"></span> Cornell TA · Data Science &amp; AI</span>
+            <span class="badge">Phi Kappa Phi Honor Society</span>
+            <span class="badge">AI Academic Fellowship</span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="./assets/Jose Salinas Tech CV.pdf" target="_blank">Resume (PDF)</a>
+            <a class="btn" href="mailto:js3873@cornell.edu">js3873@cornell.edu</a>
+            <a class="btn" href="https://linkedin.com/in/jose-salinas-336424173" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/josesalinas50c-lang/Portfolio" target="_blank" rel="noopener">GitHub</a>
+          </div>
+
+          <div class="edu-logos" aria-label="Education">
+            <img src="./assets/cornell.png" alt="Cornell University" />
+            <img src="./assets/kth.png"     alt="KTH Royal Institute of Technology" />
+            <img src="./assets/itba.jpg"    alt="ITBA Buenos Aires" />
+          </div>
+        </div>
+
       </div>
-    </div>
-  </header>
+    </div><!-- /.hero -->
 
-  <main>
-    <div class="section-title">Featured Projects</div>
-    <div class="grid">
+    <!-- Experience -->
+    <section id="experience">
+      <div class="section-title">Experience</div>
+      <div class="exp-list">
 
-      <!-- ====== PM-FIRST PROJECTS ====== -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">CTO Co-founder</span>
+            <span class="exp-meta">Aug 2025 – Present · Remote</span>
+          </div>
+          <div class="exp-company">Bobi Inc</div>
+          <ul class="exp-bullets">
+            <li>Built Bobi's <strong>iOS app</strong> to connect content creators with small businesses — Swift, Gemini AI, and Instagram Graph API integrations.</li>
+            <li>Defined product scope and system architecture; validated product-market fit through structured stakeholder interviews and iterative feature releases.</li>
+            <li>Delivered a <strong>production-ready app</strong> in 4 months; adopted 20+ early users in early 2026.</li>
+          </ul>
+        </div>
 
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/blob/main/PLANA-Management.md" target="_blank">Plana — PM Case</a></h3>
-        <p>End-to-end PM case for a renovation platform: scope, roadmap, risk management and workflow demos.</p>
-        <div class="chips">
-          <span class="chip">PM</span>
-          <span class="chip">Product</span>
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">Graduate Research &amp; Teaching Assistant — Data Science &amp; AI</span>
+            <span class="exp-meta">Jan 2026 – Present · Ithaca, NY</span>
+          </div>
+          <div class="exp-company">Cornell University</div>
+          <ul class="exp-bullets">
+            <li>Mentor student data and API projects in graduate AI coursework, improving technical project execution quality.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">Project Manager / Data Scientist</span>
+            <span class="exp-meta">Jun 2024 – Sep 2025 · U.S. Remote</span>
+          </div>
+          <div class="exp-company">LoopStudio</div>
+          <ul class="exp-bullets">
+            <li>Led cross-regional engineering teams across projects with <strong>~$10K monthly budgets</strong>, achieving 5 successful production deployments in one year.</li>
+            <li>Eliminated <strong>~16 weekly manual reporting hours</strong> across 4 PMs by building an internal automation app integrating the Harvest API.</li>
+            <li>Built automated performance dashboards providing real-time visibility into team utilization and client delivery metrics.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">Project Manager</span>
+            <span class="exp-meta">Apr 2022 – Aug 2023 · U.S. Remote / Argentina / Sweden</span>
+          </div>
+          <div class="exp-company">Agile Solutions</div>
+          <ul class="exp-bullets">
+            <li>Built the Argentina technical team from inception — a fully operational <strong>delivery unit of 12 people</strong> with ~$20K/month budget.</li>
+            <li>Engineered a legally compliant cross-border contractor structure improving talent retention under a constrained startup budget.</li>
+            <li>Reduced compensation costs by <strong>~50%</strong> vs. market benchmarks using Python and Power BI analytics tools.</li>
+            <li>Relocated to Sweden to secure AI ecosystem partnerships, defining the company's 2023 AI strategy.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-title">Featured Projects</div>
+      <div class="grid">
+
+        <div class="card">
+          <div class="card-tag">iOS · Startup</div>
+          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio" target="_blank">Bobi — iOS App</a></h3>
+          <p>Platform connecting content creators with small businesses. Built end-to-end in Swift with Gemini AI and Instagram Graph API integrations. 20+ early users in production.</p>
+          <div class="chips">
+            <span class="chip">Swift</span>
+            <span class="chip">iOS</span>
+            <span class="chip">Gemini AI</span>
+            <span class="chip">Instagram API</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">PM · Cloud</div>
+          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/AWS%20Cloud%20Architecture%20Vaccine%20Project" target="_blank">AWS Cloud Architecture</a></h3>
+          <p>Serverless vaccine-data system: API Gateway + Lambda + DynamoDB + VPC Endpoints, multi-AZ architecture, fully deployed via Terraform.</p>
+          <div class="chips">
+            <span class="chip">AWS</span>
+            <span class="chip">Terraform</span>
+            <span class="chip">Serverless</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">PM · Product</div>
+          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/blob/main/PLANA-Management.md" target="_blank">Plana — PM Case</a></h3>
+          <p>End-to-end PM case for a renovation platform: scope definition, roadmap, risk management and workflow demos.</p>
+          <div class="chips">
+            <span class="chip">PM</span>
+            <span class="chip">Roadmap</span>
+            <span class="chip">Risk</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">PM · UX</div>
+          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/blob/main/Relight-Loop.md" target="_blank">Relight — PM with LoopStudio</a></h3>
+          <p>Directed full UX redesign for the Relight platform; stakeholder alignment, delivery management and quality handoff.</p>
+          <div class="chips">
+            <span class="chip">PM</span>
+            <span class="chip">UX</span>
+            <span class="chip">LoopStudio</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">Python · Health</div>
+          <h3><a href="https://github.com/js3873-web/Perinatal-Mental-Health-App.git" target="_blank">Perinatal Mental Health App</a></h3>
+          <p>End-to-end Flask web app for perinatal mental-health screening with risk scoring and structured clinical forms.</p>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">Flask</span>
+            <span class="chip">Healthcare</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">Python · ML</div>
+          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/ML%20Human%20Activity%20Recognition" target="_blank">Human Activity Recognition</a></h3>
+          <p>ML pipeline for smartphone-sensor activity classification (accelerometer/gyroscope) with feature engineering and model evaluation.</p>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">ML</span>
+            <span class="chip">Sensors</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">Python · Climate</div>
+          <h3><a href="https://github.com/FMDX-7/ShortTermHeatStressForecasting.git" target="_blank">Heat Stress Forecasting</a></h3>
+          <p>Time-series and ML modeling to forecast short-term heat stress indices for occupational and health-risk decision making.</p>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">Time Series</span>
+            <span class="chip">Climate</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">Python · NLP</div>
+          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/ML%20Job%20Posting%20Predictions" target="_blank">Job Posting Predictions</a></h3>
+          <p>NLP and ML to classify and cluster LinkedIn job listings, with engagement forecasting using gradient-boosting models.</p>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">NLP</span>
+            <span class="chip">XGBoost</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">Python · Six Sigma</div>
+          <h3><a href="https://github.com/jacrwalker/SixSigmaHackathon.git" target="_blank">Six Sigma Process Analytics</a></h3>
+          <p>Data-driven Six Sigma hackathon project using Python for statistical quality control and process improvement recommendations.</p>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">Six Sigma</span>
+            <span class="chip">Statistics</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">Actuarial · Risk</div>
+          <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/Actuarial%20Reserve%20Calculation%20Study" target="_blank">Actuarial Reserve Calculation</a></h3>
+          <p>Actuarial modeling for damage coverage and balance-guarantee reserves, with scenario analysis and risk simulation.</p>
+          <div class="chips">
+            <span class="chip">Actuarial</span>
+            <span class="chip">Risk</span>
+            <span class="chip">Python</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">Analytics · Viz</div>
+          <h3>
+            <a href="https://public.tableau.com/views/FinalProyecto/Final?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener">
+              Tableau Analytics Dashboard
+            </a>
+          </h3>
+          <p>Interactive Tableau dashboard for exploratory analytics and executive-level data storytelling.</p>
+          <div class="chips">
+            <span class="chip">Tableau</span>
+            <span class="chip">Data Viz</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-title">Skills</div>
+      <div class="skill-grid">
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">Swift</span>
+            <span class="chip">R</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Spark</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Analytics &amp; BI</h4>
+          <div class="chips">
+            <span class="chip">Tableau</span>
+            <span class="chip">Power BI</span>
+            <span class="chip">Excel</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Cloud &amp; Dev</h4>
+          <div class="chips">
+            <span class="chip">AWS</span>
+            <span class="chip">Terraform</span>
+            <span class="chip">Flask</span>
+            <span class="chip">iOS / SwiftUI</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>AI &amp; ML</h4>
+          <div class="chips">
+            <span class="chip">Machine Learning</span>
+            <span class="chip">NLP</span>
+            <span class="chip">Gemini AI</span>
+            <span class="chip">Time Series</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Leadership</h4>
+          <div class="chips">
+            <span class="chip">Project Management</span>
+            <span class="chip">Six Sigma Black Belt</span>
+            <span class="chip">Systems Engineering</span>
+            <span class="chip">Cross-functional Teams</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/blob/main/Relight-Loop.md" target="_blank">Relight — PM with LoopStudio</a></h3>
-        <p>Directed redesign to a modern, pleasant UX for the Relight platform; stakeholder alignment & delivery.</p>
-        <div class="chips">
-          <span class="chip">PM</span>
-          <span class="chip">UX</span>
-        </div>
-      </div>
+  </div><!-- /.container -->
 
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/blob/main/Gestores-Web-Page.md" target="_blank">Gestores Actuariales Website</a></h3>
-        <p>Full website delivery: information architecture, content strategy, bilingual structure, deployment & SEO basics.</p>
-        <div class="chips">
-          <span class="chip">PM</span>
-          <span class="chip">Web</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/Agricultural%20Productive%20Advisory%20Project" target="_blank">Agricultural Productivity Consulting</a></h3>
-        <p>Consulting-style engagement: optimization + Monte Carlo simulator for crop performance, with interactive decision tool for managers.</p>
-        <div class="chips">
-          <span class="chip">PM</span>
-          <span class="chip">Optimization</span>
-          <span class="chip">Monte Carlo</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/AWS%20Cloud%20Architecture%20Vaccine%20Project" target="_blank">AWS Cloud Architecture</a></h3>
-        <p>Serverless system design for a vaccine project: API Gateway + Lambda + DynamoDB + VPC Endpoints; multi-AZ architecture.</p>
-        <div class="chips">
-          <span class="chip">PM</span>
-          <span class="chip">AWS</span>
-          <span class="chip">Architecture</span>
-        </div>
-      </div>
-
-      <!-- ====== PYTHON PROJECTS (SECOND PRIORITY) ====== -->
-
-      <div class="card">
-        <h3>
-          <a href="https://github.com/js3873-web/Perinatal-Mental-Health-App.git" target="_blank">
-            Perinatal Mental Health Screening — Flask App
-          </a>
-        </h3>
-        <p>End-to-end health web application in Python (Flask) for perinatal mental-health screening, with risk scoring and structured clinical forms.</p>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">Flask</span>
-          <span class="chip">Healthcare</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>
-          <a href="https://github.com/FMDX-7/ShortTermHeatStressForecasting.git" target="_blank">
-            Short-Term Heat Stress Forecasting
-          </a>
-        </h3>
-        <p>Python-based time-series and ML modeling to forecast short-term heat stress indices, supporting occupational and health-risk decision making.</p>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">Time Series</span>
-          <span class="chip">Health / Climate</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>
-          <a href="https://github.com/jacrwalker/SixSigmaHackathon.git" target="_blank">
-            Six Sigma Hackathon — Process Analytics
-          </a>
-        </h3>
-        <p>Data-driven Six Sigma hackathon project using Python for process analytics, statistical quality control and improvement recommendations.</p>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">Six Sigma</span>
-          <span class="chip">Process Improvement</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/ML%20Human%20Activity%20Recognition" target="_blank">Human Activity Recognition</a></h3>
-        <p>Python ML pipeline for smartphone-sensor activity classification (accelerometer/gyroscope) with feature engineering and model evaluation.</p>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">ML</span>
-          <span class="chip">Sensors</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/ML%20Job%20Posting%20Predictions" target="_blank">Job Posting Predictions</a></h3>
-        <p>Python-based NLP and ML to classify and cluster LinkedIn job listings, with engagement forecasting using gradient-boosting models.</p>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">NLP</span>
-          <span class="chip">XGBoost</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/Player%20Market%20Value%20Prediction%20ML" target="_blank">Player Market Value Prediction</a></h3>
-        <p>Python regression models to estimate football player market value using public datasets and engineered performance features.</p>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">Regression</span>
-          <span class="chip">Sports Analytics</span>
-        </div>
-      </div>
-
-      <!-- ====== OTHER ANALYTICS / RISK / VIZ ====== -->
-
-      <div class="card">
-        <h3><a href="https://github.com/josesalinas50c-lang/Portfolio/tree/main/Actuarial%20Reserve%20Calculation%20Study" target="_blank">Actuarial Reserve Calculation</a></h3>
-        <p>Actuarial modeling for damage coverage and balance-guarantee reserves, with scenario analysis and risk simulation.</p>
-        <div class="chips">
-          <span class="chip">Actuarial</span>
-          <span class="chip">Risk</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>
-          <a href="https://public.tableau.com/views/FinalProyecto/Final?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
-             target="_blank">
-            Tableau Analytics Dashboard — Final Project
-          </a>
-        </h3>
-        <p>Interactive Tableau dashboard for exploratory analytics and executive-level data storytelling.</p>
-        <div class="chips">
-          <span class="chip">Tableau</span>
-          <span class="chip">Data Visualization</span>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <footer class="footer">
-    <header style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;">
-      <span>© Jose Salinas</span>
-      <span><a href="mailto:josesalinas50c@gmail.com">Contact</a></span>
-    </header>
-  </footer>
+  <div class="container">
+    <footer>
+      <span>© 2026 Jose Ruben Salinas</span>
+      <span>
+        <a href="mailto:js3873@cornell.edu">js3873@cornell.edu</a> ·
+        <a href="mailto:josesalinas50c@gmail.com">josesalinas50c@gmail.com</a>
+      </span>
+    </footer>
+  </div>
 
   <script>
     const btn = document.getElementById('themeBtn');
     const setTheme = t => (document.documentElement.setAttribute('data-theme', t), localStorage.setItem('theme', t));
-    const saved = localStorage.getItem('theme'); 
-    if(saved) setTheme(saved);
-    btn.addEventListener('click',()=>{
-      const cur=document.documentElement.getAttribute('data-theme')||'dark';
-      setTheme(cur==='dark'?'light':'dark');
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+    btn.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+      setTheme(cur === 'dark' ? 'light' : 'dark');
     });
   </script>
 
