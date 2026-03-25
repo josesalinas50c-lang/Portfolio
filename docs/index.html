@@ -207,6 +207,22 @@
     .footer-links a { font-size: .78rem; color: var(--muted); transition: color .2s; }
     .footer-links a:hover { color: var(--text); }
 
+    /* ── PLANA SHOWCASE ── */
+    .plana-showcase { padding: 72px 0; }
+    .plana-inner { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }
+    .plana-top { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding: 48px 48px 40px; align-items: center; }
+    .plana-kicker { font-size: .68rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #3b82f6; margin-bottom: 10px; }
+    .plana-title { font-family: 'DM Serif Display', serif; font-size: 2.4rem; line-height: 1.1; color: var(--text); margin-bottom: 16px; }
+    .plana-desc { font-size: .9rem; color: var(--muted); line-height: 1.75; margin-bottom: 24px; }
+    .plana-desc strong { color: var(--text); font-weight: 600; }
+    .plana-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .plana-metric { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
+    .plana-metric-num { font-size: 1.5rem; font-weight: 800; color: var(--text); line-height: 1; }
+    .plana-metric-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-top: 4px; }
+    .plana-tech { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 20px; }
+    .plana-chip { font-size: .68rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; border: 1px solid #1e3a6a; color: #3b82f6; padding: 4px 9px; border-radius: 3px; }
+    .plana-phones { display: flex; gap: 0; border-top: 1px solid var(--border); background: #f0f2f8; padding: 32px 48px; overflow-x: auto; align-items: flex-end; justify-content: center; }
+
     @media (max-width: 800px) {
       .hero-grid { grid-template-columns: 1fr; gap: 28px; }
       .hero-photo img { width: 110px; height: 110px; border-radius: 50%; }
@@ -214,6 +230,8 @@
       .work-grid { grid-template-columns: 1fr 1fr; }
       .bobi-top { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
       .bobi-phones { padding: 24px 20px; justify-content: flex-start; }
+      .plana-top { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
+      .plana-phones { padding: 24px 20px; justify-content: flex-start; }
     }
     @media (max-width: 560px) {
       .wrap { padding: 0 18px; }
@@ -231,6 +249,8 @@
     <span class="nav-name">Jose Salinas</span>
     <div class="nav-links">
       <a href="#experience">Experience</a>
+      <a href="#bobi">Bobi</a>
+      <a href="#plana">Plana</a>
       <a href="#pm">Product</a>
       <a href="#ai">AI Eng</a>
       <a href="#ds">Data</a>
@@ -436,6 +456,85 @@
             <img src="./assets/bobi/IMG_1227.PNG" alt="Bobi — Analytics" />
           </div>
           <div class="phone-label">Brand · Analytics</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<hr>
+
+<!-- PLANA SHOWCASE -->
+<div class="wrap">
+  <section class="plana-showcase" id="plana">
+    <div class="section-label">Featured Build</div>
+    <div class="plana-inner">
+      <div class="plana-top">
+        <div>
+          <div class="plana-kicker">PM · Product Owner · LoopStudio · 2024–2025</div>
+          <h2 class="plana-title">Plana — Renovation Marketplace</h2>
+          <p class="plana-desc">
+            Led product delivery as PM for <a href="https://www.planax.co/" target="_blank" rel="noopener" style="color:#3b82f6;">planax.co</a> — a <strong>dual-sided iOS marketplace</strong> connecting homeowners with renovation contractors.
+            Homeowners post projects with AI-generated cost estimates; contractors browse, bid, and get selected.
+            Managed scope, stakeholder alignment, design sprints, and end-to-end delivery at LoopStudio.
+          </p>
+          <div class="plana-tech">
+            <span class="plana-chip">Product Management</span>
+            <span class="plana-chip">Product Owner</span>
+            <span class="plana-chip">iOS</span>
+            <span class="plana-chip">Marketplace</span>
+            <span class="plana-chip">UX</span>
+            <span class="plana-chip">Stakeholder Alignment</span>
+          </div>
+        </div>
+        <div>
+          <div class="plana-metrics">
+            <div class="plana-metric">
+              <div class="plana-metric-num">24</div>
+              <div class="plana-metric-label">Active projects</div>
+            </div>
+            <div class="plana-metric">
+              <div class="plana-metric-num">16</div>
+              <div class="plana-metric-label">Bidding contractors</div>
+            </div>
+            <div class="plana-metric">
+              <div class="plana-metric-num">10</div>
+              <div class="plana-metric-label">Completed projects</div>
+            </div>
+            <div class="plana-metric">
+              <div class="plana-metric-num">$79k</div>
+              <div class="plana-metric-label">Max estimated job value</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone screenshots — light bg to match Plana's white UI -->
+      <div class="plana-phones">
+        <div class="phone-wrap">
+          <div class="phone-frame" style="transform: rotate(-3deg) translateY(6px); border-color:#d0d4e0;">
+            <img src="./assets/plana/plana1.png" alt="Plana — Dashboard v1" />
+          </div>
+          <div class="phone-label" style="color:#6b7280;">Dashboard</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone-frame" style="transform: rotate(-1deg) translateY(2px); border-color:#d0d4e0;">
+            <img src="./assets/plana/plana2.png" alt="Plana — Dashboard v2" />
+          </div>
+          <div class="phone-label" style="color:#6b7280;">Stats View</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone-frame" style="transform: rotate(1deg) translateY(2px); border-color:#d0d4e0;">
+            <img src="./assets/plana/plana3.png" alt="Plana — New Project" />
+          </div>
+          <div class="phone-label" style="color:#6b7280;">New Project</div>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone-frame" style="transform: rotate(3deg) translateY(6px); border-color:#d0d4e0;">
+            <img src="./assets/plana/plana4.png" alt="Plana — Cost Estimation" />
+          </div>
+          <div class="phone-label" style="color:#6b7280;">Cost Estimate</div>
         </div>
       </div>
 
